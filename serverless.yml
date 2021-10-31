@@ -1,0 +1,24 @@
+service: rust-sls
+provider:
+  name: aws
+  runtime: rust
+  lambdaHashingVersion: 20201221
+  memorySize: 128
+  region: ap-northeast-1
+custom:
+  # デフォルトだとrust1.4系でしかビルドせず、compileエラー
+  # docker build -t softprops/lambda-rust:1.51 https://github.com/softprops/lambda-rust.git#e6137ddbac36d104236407eb537c6c03a16a30fa
+  rust:
+    dockerTag: '1.51'
+    dockerImage: 'softprops/lambda-rust'
+plugins:
+  - serverless-rust
+package:
+  individually: true
+functions:
+  test-func:
+    handler: rust-sls
+    events:
+      - http:
+          path: /
+          method: GET

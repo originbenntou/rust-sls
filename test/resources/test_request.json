@@ -1,0 +1,24 @@
+{
+  "path": "/",
+  "httpMethod": "GET",
+  "headers": {
+    "Host": "amazonaws.com"
+  },
+  "requestContext": {
+    "accountId": "",
+    "resourceId": "",
+    "stage": "dev",
+    "requestId": "",
+    "identity": {
+      "sourceIp": ""
+    },
+    "resourcePath": "",
+    "httpMethod": "",
+    "apiId": ""
+  },
+  "queryStringParameters": {
+    "name": "Test"
+  },
+  "body": "{\"foo\":\"bar\"}",
+  "isBase64Encoded": false
+}
