@@ -9,11 +9,11 @@ extern crate maplit;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
-    lambda_runtime::run(handler(test_func)).await?;
+    lambda_runtime::run(handler(get_query)).await?;
     Ok(())
 }
 
-async fn test_func(
+async fn get_query(
     request: Request,
     _ctx: Context
 ) -> Result<impl IntoResponse, Error> {
@@ -36,8 +36,8 @@ async fn test_func(
 mod tests {
     use super::*;
 
-    #[test]
-    fn handler_handles() {
+    #[tokio::test]
+    async fn test_get_query() {
         let mocked = hashmap! {
             "name".into() => vec!["Test".into()]
         };
@@ -45,7 +45,7 @@ mod tests {
         let request: Request<> = Request::default().with_query_string_parameters(mocked);
         let ctx = Context::default();
 
-        let response = test_func(request, ctx)
+        let response = get_query(request, ctx).await
             .expect("expected Ok(_) value")
             .into_response();
 
