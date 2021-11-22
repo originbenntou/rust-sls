@@ -4,6 +4,9 @@ use lambda_http::{
 };
 use serde_json::json;
 
+use rusoto_core::{Region};
+use rusoto_s3::{S3, S3Client};
+
 #[macro_use]
 extern crate maplit;
 
@@ -55,4 +58,8 @@ mod tests {
 
         assert_eq!(response.body(), expected.body())
     }
+}
+
+fn default_profile_client(region: Region) -> S3Client {
+    S3Client::new(region)
 }
